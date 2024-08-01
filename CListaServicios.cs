@@ -57,7 +57,7 @@ namespace Hospital
             string datos = "";
             foreach (ServiciosMedicos auxiliar in listaServicios)
             {
-                datos +=  auxiliar.MostrarEmpleado(aux);
+                datos += auxiliar.MostrarEmpleado(aux);
             }
             return datos;
         }
@@ -67,17 +67,27 @@ namespace Hospital
             string datos = "";
             foreach (ServiciosMedicos auxiliar in listaServicios)
             {
-                datos +=  auxiliar.MostrarEmpleado(aux);
+                datos += auxiliar.MostrarEmpleado(aux);
             }
             return datos;
         }
 
         public void EmpleadosServicios()
         {
-            foreach(ServiciosMedicos servicio in listaServicios)
+            foreach (ServiciosMedicos servicio in listaServicios)
             {
                 Console.WriteLine($"\nServicio: {servicio.GetNombre()} - Cantidad empleados de sanidad: {servicio.CantEmpleadosSanidad()} - Cantidad empleados de apoyo: {servicio.CantEmpleadosApoyo()} - Sueldos totales: {servicio.SueldosEmpleados()}\n");
             }
+        }
+
+        public string MostrarPacientes(uint historia)
+        {
+            string datos = "";
+            foreach (ServiciosMedicos aux in listaServicios)
+            {
+                datos += "\n" + aux.ToString() + "\n\t" + aux.MostrarPacientesServicio(historia);
+            }
+            return datos;
         }
     }
 

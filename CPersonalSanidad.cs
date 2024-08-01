@@ -61,6 +61,10 @@ namespace Hospital
 
         public void EstablecerSueldoProfesional()
         {
+
+            if (base.GetSueldo() == 0)
+                base.EstablecerSueldo();
+
             double sueldoTotal = base.GetSueldo();
 
             if (base.GetCategoriaProfesional().ToLower() == "enfermero")

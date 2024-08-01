@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Hospital;
 
 namespace Hospital
@@ -15,6 +16,8 @@ namespace Hospital
         private PersonalSanidad residente;
         private ArrayList empleadosSanidad;
         private ArrayList empleadosApoyo;
+        private ArrayList consultorios;
+        private ArrayList pacientes;
 
         public ServiciosMedicos(UInt32 cod, string nom, PersonalSanidad jefeDeServ)
         {
@@ -26,6 +29,8 @@ namespace Hospital
             this.medicoTitular = new PersonalSanidad();
             this.medicoAsociado = new PersonalSanidad();
             this.residente = new PersonalSanidad();
+            this.consultorios = new ArrayList();
+            this.pacientes = new ArrayList();
         }
 
         public ServiciosMedicos()
@@ -38,6 +43,8 @@ namespace Hospital
             this.medicoTitular = new PersonalSanidad();
             this.medicoAsociado = new PersonalSanidad();
             this.residente = new PersonalSanidad();
+            this.consultorios = new ArrayList();
+            this.pacientes = new ArrayList();
         }
 
         //setters
@@ -72,6 +79,33 @@ namespace Hospital
         public void AgregarEmpleados(PersonalSanidad aux) { empleadosSanidad.Add(aux); }
 
         public void AgregarEmpleados(PersonalApoyo aux) { empleadosApoyo.Add(aux); }
+
+        public void AgregarConsultorio(Consultorio aux) { consultorios.Add(aux); }
+
+        public void AgregarPacientes(Paciente aux) { pacientes.Add(aux); }
+
+        public uint BuscarConsultorio(uint codigo)
+        {
+            foreach (Consultorio aux in  consultorios)
+            {
+                if (aux != null)
+                    if (aux.GetCodigo() == codigo)
+                        return 1;
+            }
+            return 0;
+        }
+
+        public string MostrarConsultorios()
+        {
+            string datos = "";
+
+            foreach (Consultorio aux in consultorios)
+            {
+                if (aux != null)
+                    datos += "\n" + aux.ToString();
+            }
+            return datos;
+        }
 
         public string MostrarEmpleados()
         {
@@ -168,6 +202,18 @@ namespace Hospital
                 }
             }
             return sueldosEmpleados;
+        }
+
+        public string MostrarPacientesServicio(uint historia)
+        {
+            string datos = "";
+            foreach (Paciente aux in pacientes)
+            {
+                if (aux != null)
+                    if (aux.GetHistoriaClinica() == historia)
+                        datos += "\nPaciente: " + aux.ToString();
+            }
+            return datos;
         }
 
         public override string ToString()
